@@ -47,35 +47,4 @@ public class UserDao {
 
         return user;
     }
-
-    /*public Connection getConnection() throws ClassNotFoundException, SQLException;
-    {
-        Map<String, String> env = getenv();
-        String dbHost = env.get("DB_HOST");
-        String dbUser = env.get("DB_USER");
-        String dbPassword = env.get("DB_PASSWORD");
-
-        Class.forName("com.mysql.cj.jdbc.Driver");
-
-        Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
-
-        return conn;
-    }*/
-
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        ConnectionMaker cm = new DConnectionMaker();
-        UserDao userDao = new UserDao(cm);
-        User user = new User();
-        user.setId("8");
-        user.setName("슈퍼콘");
-        user.setPassword("1234");
-        userDao.add(user);
-
-        User selectedUser = userDao.get("8");
-        System.out.println(selectedUser.getId());
-        System.out.println(selectedUser.getName());
-        System.out.println(selectedUser.getPassword());
-
-    }
 }
