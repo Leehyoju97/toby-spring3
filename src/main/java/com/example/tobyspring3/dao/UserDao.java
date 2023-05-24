@@ -7,7 +7,7 @@ import java.util.Map;
 
 import static java.lang.System.getenv;
 
-public class UserDao {
+public abstract class UserDao {
 
     public void add(User user) throws ClassNotFoundException, SQLException {
 
@@ -45,7 +45,8 @@ public class UserDao {
         return user;
     }
 
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
+    /*{
         Map<String, String> env = getenv();
         String dbHost = env.get("DB_HOST");
         String dbUser = env.get("DB_USER");
@@ -56,18 +57,18 @@ public class UserDao {
         Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
 
         return conn;
-    }
+    }*/
 
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserDao userDao = new UserDao();
+        UserDao userDao = new NUserDao();
         User user = new User();
-        user.setId("3");
-        user.setName("son");
+        user.setId("4");
+        user.setName("park");
         user.setPassword("1234");
 //        userDao.add(user);
 
-        User selectedUser = userDao.get("3");
+        User selectedUser = userDao.get("4");
         System.out.println(selectedUser.getId());
         System.out.println(selectedUser.getName());
         System.out.println(selectedUser.getPassword());
