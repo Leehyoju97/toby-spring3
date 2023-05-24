@@ -3,15 +3,12 @@ package com.example.tobyspring3.dao;
 import com.example.tobyspring3.domain.User;
 
 import java.sql.*;
-import java.util.Map;
-
-import static java.lang.System.getenv;
 
 public class UserDao {
 
     ConnectionMaker connectionMaker;
-    public UserDao() {
-        this.connectionMaker = new DConnectionMaker();
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
     }
 
 
@@ -67,14 +64,15 @@ public class UserDao {
 
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserDao userDao = new UserDao();
+        ConnectionMaker cm = new DConnectionMaker();
+        UserDao userDao = new UserDao(cm);
         User user = new User();
-        user.setId("6");
-        user.setName("king22");
+        user.setId("8");
+        user.setName("슈퍼콘");
         user.setPassword("1234");
         userDao.add(user);
 
-        User selectedUser = userDao.get("6");
+        User selectedUser = userDao.get("8");
         System.out.println(selectedUser.getId());
         System.out.println(selectedUser.getName());
         System.out.println(selectedUser.getPassword());
